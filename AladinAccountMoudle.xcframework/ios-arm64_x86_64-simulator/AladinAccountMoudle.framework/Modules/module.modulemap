@@ -1,0 +1,11 @@
+framework module AladinAccountMoudle {
+  umbrella header "AladinAccountMoudle.h"
+
+  export *
+  module * { export * }
+}
+
+module AladinAccountMoudle.Swift {
+    header "AladinAccountMoudle-Swift.h"
+    requires objc
+}
