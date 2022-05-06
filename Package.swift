@@ -6,26 +6,31 @@ import PackageDescription
 let package = Package(
     name: "AladinAcountSPM.git",
     products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "AladinAcountSPM.git",
-            targets: ["AladinAcountSPM.git", "AladinAccountMoudle"]),
+            targets: ["AladinAcountSPM.git",
+                      "AladinAccountMoudle",
+                     ])
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
+        .package(url: "https://github.com/kakao/kakao-ios-sdk", branch: "master"),
+        
     ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages this package depends on.
-        .target(
-            name: "AladinAcountSPM.git",
-            dependencies: []),
         .binaryTarget(
             name: "AladinAccountMoudle",
             path: "AladinAccountMoudle.xcframework"),
+    
+        .target(
+            name: "AladinAcountSPM.git",
+            dependencies: ["AladinAccountMoudle",
+                           .product(name: "KakaoSDK", package: "kakao-ios-sdk")
+                          ]),
         .testTarget(
             name: "AladinAcountSPM.gitTests",
-            dependencies: ["AladinAcountSPM.git"]),
+            dependencies: ["AladinAcountSPM.git",
+                           "AladinAccountMoudle",
+                           .product(name: "KakaoSDK", package: "kakao-ios-sdk")
+                          ]),
     ]
 )
